@@ -17,17 +17,31 @@ function App() {
 	const data = getMockData('MainData')
 	const userInfo = new UserInfos(data)
 	console.log('data', data)
-	const score = userInfo.getScore()
-	console.log('userInfo', userInfo.getScore())
+	const scoreChart = userInfo.getScore()
+	const percentage = userInfo.getScorePercentage()
+	const userFirstname = userInfo.getFirstName()
+	console.log('userInfo', userInfo.getScorePercentage())
 
   return (
-	<div className="App">
+	<>
 		<Navbar></Navbar>
-		<SideBar></SideBar>
-		<main className='dashboard'>
-		<ScoreChart score={score}></ScoreChart>
-		</main>
-	</div>
+		<div class="dashboard">
+			
+			<SideBar></SideBar>
+			<main className='main'>
+				<p>Bonjour {userFirstname}</p>
+				<div className="container">
+					<div>
+						<div></div>
+						<div></div>
+					</div>
+					<div></div>
+				</div>
+				<ScoreChart score={scoreChart} percentage={percentage}></ScoreChart>
+			</main>
+
+		</div>
+	</>
   );
 }
 

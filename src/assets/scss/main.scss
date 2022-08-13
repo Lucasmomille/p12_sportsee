@@ -8,7 +8,6 @@
     
 }
 #root {
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -33,10 +32,14 @@ a {
     text-decoration: none;
     color: $color-black;
 }
-/* .App {
-    height: 100vh;
-} */
+
 .dashboard {
+    display: flex;
+    height: calc(100vh - 80px);
+}
+
+
+.main {
     max-width: 100%;
-    margin: 3rem 2rem 2rem 15rem;
+    margin: 3rem 2rem 2rem 5rem;
 }

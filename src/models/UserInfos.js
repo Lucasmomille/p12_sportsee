@@ -6,21 +6,20 @@ import lipid from '../assets/icons/lipid.svg'
 
 /**
  * @class
- * @classdesc
+ * @classdesc This is a class to get general informations from user
  */
 export class UserInfos {
   /**
    * Create a UserInfos.
-   * @param { Object } data JSON object from API or mock data
    * @param { Number } data.id user id
-   * @param { ?Number } data.todayScore user's daily score
-   * @param { ?Number } data.score user's score
+   * @param { Object } data.userInfos user information
+   * @param { Number } data.todayScore user's daily score
    * @param { Object } data.keyData nutrient information
    */
   constructor(data) {
     this.id = data.id
     this.userInfos = data.userInfos
-    this.todayScore = data.todayScore ? data.todayScore : data.score
+    this.todayScore = data.todayScore
     this.keyData = data.keyData
   }
 
@@ -59,9 +58,9 @@ export class UserInfos {
    * Get the user score in percentage.
    * @return { Number } User's daily score
    */
-  /* getScorePercentage() {
+  getScorePercentage() {
     return this.todayScore * 100
-  } */
+  }
 
   /**
    * Get all infos to generate nutrient cards.
