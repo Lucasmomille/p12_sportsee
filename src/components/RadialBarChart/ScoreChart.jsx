@@ -4,35 +4,45 @@ import { RadialBarChart, RadialBar } from 'recharts';
 import './scorechart.scss';
 
 export default function ScoreChart(props) {
-    console.log('score in child', props.score[1].percent)
     return (
         <div className="score">
-			<RadialBarChart width={500} height={500} innerRadius="10%" outerRadius="80%" data={props.score}>
+			<RadialBarChart width={400} height={400} innerRadius="10%" outerRadius="80%" data={props.score}>
 				<RadialBar
 					minAngle={15}
 					dataKey="percent"
 					clockWise
 				/>
 				<text
-              className="score__title"
-              x="10%"
-              y={33}
-              fill="#282D30"
-            >
-              <tspan fontSize="15">Score</tspan>
+                    className="score__title"
+                    x="10%"
+                    y={43}
+                    fill="#000000"
+                >
+              <tspan fontSize="25">Score</tspan>
             </text>
 			<text
-              className="custom-rechart-title"
-              x="50%"
-              y="38%"
-              fill="#282D30"
-              textAnchor="middle"
-              dominantBaseline="central"
+                className="custom-rechart-title"
+                x="50%"
+                y="50%"
+                fill="#000000"
+                textAnchor="middle"
+                dominantBaseline="central"
+                fontSize={25}
             >
-				<tspan>{props.percentage}%</tspan>
+				<tspan className='score__percentage'>{props.percentage}%</tspan>
 			</text>
-			</RadialBarChart>
-			
+            <text
+                className="custom-rechart-title"
+                x="50%"
+                y="55%"
+                fill="#000000"
+                textAnchor="middle"
+                fontSize={15}
+                dominantBaseline="central"
+            >
+				<tspan>de votre objectif</tspan>
+			</text>
+			</RadialBarChart>	
         </div>
     )
 }

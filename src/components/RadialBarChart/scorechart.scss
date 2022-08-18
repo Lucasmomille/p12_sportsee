@@ -1,3 +1,9 @@
+@import '../../assets/scss/variables/variables.scss';
 .score {
-    max-width: 100%;
+    width: fit-content;
+    background-color: $color-white;
+
+    &__percentage {
+        font-weight: 700;
+    }
 }

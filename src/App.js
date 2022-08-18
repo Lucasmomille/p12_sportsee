@@ -3,8 +3,10 @@ import React from 'react'
 import Navbar from './components/Navbar/NavBar'
 import SideBar from './components/SideBar/SideBar'
 import ScoreChart from './components/RadialBarChart/ScoreChart'
+import ActivityChart from './components/BarChart/ActivityChart'
 import { getMockData } from './helpers/getDatas'
 import { UserInfos } from './models/UserInfos'
+import { UserActivity } from './models/UserActivity'
 
 
 function App() {
@@ -14,14 +16,18 @@ function App() {
 		.catch(e => console.log(e))
 
 	}, []) */
-	const data = getMockData('MainData')
-	const userInfo = new UserInfos(data)
-	console.log('data', data)
+	const userMainData = getMockData('MainData')
+	const userInfo = new UserInfos(userMainData)
+	console.log('userMainData', userMainData)
 
 	const scoreChart = userInfo.getScore()
 	const percentage = userInfo.getScorePercentage()
 	const userFirstname = userInfo.getFirstName()
-	console.log('userInfo', userInfo.getScorePercentage())
+	
+	const userActivityData = getMockData('Activity')
+	const userActivity = new UserActivity(userActivityData)
+	const userActivitySession = userActivity.getSessions()
+	console.log('userActivitySession', userActivitySession)
 
   return (
 	<>
@@ -41,6 +47,7 @@ function App() {
 					</div>
 					<div></div>
 				</div>
+				<ActivityChart sessions={userActivitySession}></ActivityChart>
 				<ScoreChart score={scoreChart} percentage={percentage}></ScoreChart>
 			</main>
 
