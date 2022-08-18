@@ -3,7 +3,7 @@
 
 :root {
     background-color: $color-white;
-    color: $color-primary;
+    color: $color-black;
     font-size: 1em;
     
 }
@@ -42,4 +42,20 @@ a {
 .main {
     max-width: 100%;
     margin: 3rem 2rem 2rem 5rem;
+}
+
+.hello {
+    
+    &__title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    &__subtitle {
+        font-size: 1.5rem;
+    }
+}
+
+.--color-primary {
+    color: $color-primary
 }

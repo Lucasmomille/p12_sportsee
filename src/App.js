@@ -17,6 +17,7 @@ function App() {
 	const data = getMockData('MainData')
 	const userInfo = new UserInfos(data)
 	console.log('data', data)
+
 	const scoreChart = userInfo.getScore()
 	const percentage = userInfo.getScorePercentage()
 	const userFirstname = userInfo.getFirstName()
@@ -25,11 +26,14 @@ function App() {
   return (
 	<>
 		<Navbar></Navbar>
-		<div class="dashboard">
+		<div className="dashboard">
 			
 			<SideBar></SideBar>
 			<main className='main'>
-				<p>Bonjour {userFirstname}</p>
+			<div className='hello'>
+				<p className='hello__title'>Bonjour <span className='--color-primary'>{userFirstname}</span></p>
+				<p className="hello__subtitle">Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
+			</div>
 				<div className="container">
 					<div>
 						<div></div>
