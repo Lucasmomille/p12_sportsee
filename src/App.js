@@ -41,14 +41,15 @@ function App() {
 				<p className="hello__subtitle">Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
 			</div>
 				<div className="container">
-					<div>
-						<div></div>
-						<div></div>
+					<div className='charts'>
+						<ActivityChart sessions={userActivitySession}></ActivityChart>
+						<div className='charts__container'>
+							<ScoreChart score={scoreChart} percentage={percentage}></ScoreChart>
+						</div>
 					</div>
 					<div></div>
 				</div>
-				<ActivityChart sessions={userActivitySession}></ActivityChart>
-				<ScoreChart score={scoreChart} percentage={percentage}></ScoreChart>
+				
 			</main>
 
 		</div>

@@ -11,7 +11,6 @@ import {
   } from 'recharts'
 
 export default function ActivityChart(props) {
-    console.log('sessions in chart', props.sessions)
     return (
         <div>
             <BarChart
@@ -62,3 +61,15 @@ export default function ActivityChart(props) {
         </div>
     )
 }
+
+ActivityChart.propTypes = {
+    sessions: PropTypes.array.isRequired,
+}
+  
+ActivityChart.defaultProps =  [
+    {
+        day: '01',
+        kilogram: '100',
+        calories: '200',
+    }
+]

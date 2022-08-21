@@ -16,7 +16,7 @@ export class UserActivity {
 
   /**
    * Get the user session formatted for the chart.
-   * @return { Array.<{ calories: Number, day: String, kilogram: Number }> } User sessions data for each day
+   * @return { Array.<{ day: String, kilogram: Number, calories: Number }> }
    */
    getSessions() {
     const sessions = [...this.userSessions]
