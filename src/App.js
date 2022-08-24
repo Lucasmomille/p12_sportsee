@@ -4,9 +4,11 @@ import Navbar from './components/Navbar/NavBar'
 import SideBar from './components/SideBar/SideBar'
 import ScoreChart from './components/RadialBarChart/ScoreChart'
 import ActivityChart from './components/BarChart/ActivityChart'
+import PerformanceChart from './components/RadarChart/PerformanceChart'
 import { getMockData } from './helpers/getDatas'
 import { UserInfos } from './models/UserInfos'
 import { UserActivity } from './models/UserActivity'
+import { UserPerformance } from './models/UserPerfomance'
 
 
 function App() {
@@ -27,7 +29,10 @@ function App() {
 	const userActivityData = getMockData('Activity')
 	const userActivity = new UserActivity(userActivityData)
 	const userActivitySession = userActivity.getSessions()
-	console.log('userActivitySession', userActivitySession)
+
+	const userPerformanceData = getMockData('Performance')
+	const userPerformance = new UserPerformance(userPerformanceData).getPerformance()
+	console.log('userActivitySession', userPerformance)
 
   return (
 	<>
@@ -45,6 +50,7 @@ function App() {
 						<ActivityChart sessions={userActivitySession}></ActivityChart>
 						<div className='charts__container'>
 							<ScoreChart score={scoreChart} percentage={percentage}></ScoreChart>
+							<PerformanceChart performance={userPerformance}></PerformanceChart>
 						</div>
 					</div>
 					<div></div>

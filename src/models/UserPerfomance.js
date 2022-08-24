@@ -3,7 +3,7 @@
  * @class
  * @classdesc Class to get user's performance
  */
- export class UserActivity {
+ export class UserPerformance {
     /**
      * Create a user activity data.
      * @param { Number } data.id user id

@@ -1,14 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {
-    BarChart,
-    Bar,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-    Legend,
-  } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
 export default function ActivityChart(props) {
     return (
@@ -23,7 +15,7 @@ export default function ActivityChart(props) {
                 }}
                 barSize={7}
                 barGap={8}
-                width={800}
+                width={400}
                 height={400}
             >                    
                 <text
