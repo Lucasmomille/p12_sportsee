@@ -63,11 +63,11 @@ export class UserInfos {
   }
 
   /**
-   * Get all infos to generate nutrient cards.
-   * @return { Array.<{ name: String, src: String, alt: String, key: String, unit: String }> } Nutrients infos
+   * Get infos for energy cards.
+   * @return { Array.<{ name: String, src: String, alt: String, key: String, unit: String }> } energy infos
    */
-  getNutrientInfos() {
-    const nutrientInfos = [
+  getEnergyInfos() {
+    const energyInfos = [
       {
         name: 'calories',
         src: energy,
@@ -98,6 +98,6 @@ export class UserInfos {
       },
     ]
 
-    return nutrientInfos
+    return energyInfos
   }
 }

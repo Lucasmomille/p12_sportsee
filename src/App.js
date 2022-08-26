@@ -5,10 +5,12 @@ import SideBar from './components/SideBar/SideBar'
 import ScoreChart from './components/RadialBarChart/ScoreChart'
 import ActivityChart from './components/BarChart/ActivityChart'
 import PerformanceChart from './components/RadarChart/PerformanceChart'
+import AverageSessionChart from './components/LineChart/AverageSessionChart'
 import { getMockData } from './helpers/getDatas'
 import { UserInfos } from './models/UserInfos'
 import { UserActivity } from './models/UserActivity'
 import { UserPerformance } from './models/UserPerfomance'
+import { UserAverageSession } from './models/UserAverageSession'
 
 
 function App() {
@@ -32,7 +34,10 @@ function App() {
 
 	const userPerformanceData = getMockData('Performance')
 	const userPerformance = new UserPerformance(userPerformanceData).getPerformance()
-	console.log('userActivitySession', userPerformance)
+
+	const userAverageSessionData = getMockData('AverageSession')
+	const userAverageSession = new UserAverageSession(userAverageSessionData).getAverageSessions()
+	console.log('UserAverageSession', userAverageSession)
 
   return (
 	<>
@@ -49,6 +54,7 @@ function App() {
 					<div className='charts'>
 						<ActivityChart sessions={userActivitySession}></ActivityChart>
 						<div className='charts__container'>
+						<AverageSessionChart data={userAverageSession}></AverageSessionChart>
 							<ScoreChart score={scoreChart} percentage={percentage}></ScoreChart>
 							<PerformanceChart performance={userPerformance}></PerformanceChart>
 						</div>

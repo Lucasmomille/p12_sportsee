@@ -2,6 +2,19 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
+const CustomTooltip = ({ active, payload }) => {
+    console.log('payload', payload)
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip">
+          <p className="label">{`${payload[0].payload.kilogram} kg`}</p>
+          <p className="label">{`${payload[0].payload.calories} kCal`}</p>
+        </div>
+      );
+    }
+  
+    return null;
+  };
 export default function ActivityChart(props) {
     return (
         <div>
@@ -15,7 +28,7 @@ export default function ActivityChart(props) {
                 }}
                 barSize={7}
                 barGap={8}
-                width={400}
+                width={1200}
                 height={400}
             >                    
                 <text
@@ -31,7 +44,7 @@ export default function ActivityChart(props) {
                 <CartesianGrid vertical={false} strokeDasharray="3 3" />
                 <XAxis axisLine={false} tickLine={false} dataKey="day" />
                 <YAxis axisLine={false} tickLine={false} orientation="right" />
-                <Tooltip separator="" />
+                <Tooltip content={<CustomTooltip/>} />
                 <Legend verticalAlign="top" align="right" height={40} />
                 <Bar
                     unit="kg"
