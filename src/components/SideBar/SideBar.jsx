@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../assets/scss/components/sidebar.scss';
+import './sidebar.scss';
 
 export default function NavBar() {
 

@@ -1,0 +1,14 @@
+@import '../../assets/scss/variables/variables.scss';
+
+.performance {
+    background-color: $color-black;
+
+    .recharts-layer {
+        text {
+            fill: $color-white !important
+        }
+    }
+    .recharts-polar-grid-angle {
+        display: none;
+    }
+}

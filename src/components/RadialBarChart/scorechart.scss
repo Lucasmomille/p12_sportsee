@@ -1,9 +1,13 @@
 @import '../../assets/scss/variables/variables.scss';
 .score {
-    width: fit-content;
-    background-color: $color-white;
+    background-color: #FBFBFB;
 
     &__percentage {
         font-weight: 700;
+    }
+    .recharts-radial-bar-sector {
+        &:first-of-type {
+            fill: #FBFBFB;
+        }
     }
 }

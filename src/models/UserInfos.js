@@ -64,36 +64,32 @@ export class UserInfos {
 
   /**
    * Get infos for energy cards.
-   * @return { Array.<{ name: String, src: String, alt: String, key: String, unit: String }> } energy infos
+   * @return { Array.<{ name: String, src: String, count: Number, unit: String }> } energy infos
    */
   getEnergyInfos() {
     const energyInfos = [
       {
         name: 'calories',
         src: energy,
-        alt: 'energy',
-        key: 'calorieCount',
+        count: this.keyData.calorieCount,
         unit: 'kCal',
       },
       {
         name: 'proteines',
         src: protein,
-        alt: 'chicken',
-        key: 'proteinCount',
+        count: this.keyData.proteinCount,
         unit: 'g',
       },
       {
         name: 'glucides',
         src: carbohydrate,
-        alt: 'apple',
-        key: 'carbohydrateCount',
+        count: this.keyData.carbohydrateCount,
         unit: 'g',
       },
       {
         name: 'lipides',
         src: lipid,
-        alt: 'cheeseburger',
-        key: 'lipidCount',
+        count: this.keyData.lipidCount,
         unit: 'g',
       },
     ]

@@ -6,7 +6,7 @@ import './scorechart.scss';
 export default function ScoreChart(props) {
     return (
         <div className="score">
-			<RadialBarChart width={400} height={400} innerRadius="10%" outerRadius="80%" data={props.score}>
+			<RadialBarChart width={300} height={300} innerRadius="50%" outerRadius="80%" data={props.score}>
 				<RadialBar
 					minAngle={15}
 					dataKey="percent"
@@ -15,33 +15,34 @@ export default function ScoreChart(props) {
 				<text
                     className="score__title"
                     x="10%"
-                    y={43}
+                    y={50}
                     fill="#000000"
                 >
-              <tspan fontSize="25">Score</tspan>
-            </text>
-			<text
-                className="custom-rechart-title"
-                x="50%"
-                y="50%"
-                fill="#000000"
-                textAnchor="middle"
-                dominantBaseline="central"
-                fontSize={25}
-            >
-				<tspan className='score__percentage'>{props.percentage}%</tspan>
-			</text>
-            <text
-                className="custom-rechart-title"
-                x="50%"
-                y="55%"
-                fill="#000000"
-                textAnchor="middle"
-                fontSize={15}
-                dominantBaseline="central"
-            >
-				<tspan>de votre objectif</tspan>
-			</text>
+                    <tspan fontSize="25">Score</tspan>
+                </text>
+                <text
+                    className="custom-rechart-title"
+                    x="50%"
+                    y="45%"
+                    fill="#000000"
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fontSize={25}
+                >
+                    <tspan className='score__percentage'>{props.percentage}%</tspan>
+                </text>
+                <text
+                    className="custom-rechart-title"
+                    x="50%"
+                    y="55%"
+                    fill="#000000"
+                    fillOpacity={0.6}
+                    textAnchor="middle"
+                    fontSize={15}
+                    dominantBaseline="central"
+                >
+                    <tspan>de votre objectif</tspan>
+                </text>
 			</RadialBarChart>	
         </div>
     )

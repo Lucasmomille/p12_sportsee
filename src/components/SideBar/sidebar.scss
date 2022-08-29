@@ -1,4 +1,4 @@
-@import '../variables/variables.scss';
+@import '../../assets/scss/variables/variables.scss';
 
 .sidebar {
     background-color: $color-black;
@@ -34,7 +34,7 @@
         overflow-wrap: normal;
         position: absolute;
         bottom: 4rem;
-        left: 0;
+        left: 1rem;
         font-size: .7em;
         width: fit-content;
         transform: rotate(-90deg);

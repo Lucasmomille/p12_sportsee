@@ -1,0 +1,39 @@
+@import '../../assets/scss/variables/variables.scss';
+.card {
+    display: flex;
+    &__img {
+        padding: 1rem;
+        margin-right: 1rem;
+        
+        
+    }
+    &__count{
+        width: 100%;
+    }
+    &:not(:last-child) {
+        margin-bottom: 2rem;
+    }
+    &:first-child{
+        img {
+            background-color: rgba($color-primary, .4);
+        }
+    }
+    
+    &:nth-child(2){
+        img {
+            background-color: rgba($color-blue, .4);
+        }
+    }
+
+    &:nth-child(3){
+        img {
+            background-color: rgba($color-yellow, .4);
+        }
+    }
+
+    &:nth-child(4){
+        img {
+            background-color: rgba($color-pink, .4);
+        }
+    }
+}

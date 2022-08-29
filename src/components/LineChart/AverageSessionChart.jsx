@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import { LineChart, Line, XAxis, CartesianGrid, Tooltip, Rectangle } from 'recharts';
+import './averageChart.scss'
 
 
 const CustomCursor = (props) => {
@@ -8,9 +9,8 @@ const CustomCursor = (props) => {
     const { x, y } = points[0];
     return (
       <Rectangle
-        fill="#FF0000"
-        stroke="#FF0000"
-        fillOpacity={0.6}
+        fill="#000000"
+        fillOpacity={0.2}
         x={x}
         y={y}
         width={width}
@@ -32,22 +32,31 @@ const CustomCursor = (props) => {
   };
 export default function AverageSessionChart(props) {
     return (
-        <div>
+        <div className='average'>
             <LineChart
-                width={400}
-                height={400}
+                width={300}
+                height={300}
                 data={props.data}
                 margin={{
                     top: 5,
                     right: 30,
                     left: 20,
                     bottom: 5,
-            }}
-        >
-          <CartesianGrid strokeDasharray="3 3" vertical={false} horizontal={false} />
-          <XAxis dataKey="day" axisLine={false} tickLine={false}/>
-          <Tooltip cursor={<CustomCursor/>} content={<CustomTooltip />}/>
-          <Line type="monotone" unit="min" dot={false} dataKey='sessionLength' stroke="#FFFFFF" />
+            	}}
+       		 >
+				<text
+                    className="score__title"
+                    x="10%"
+                    y={50}
+                    fill="#000000"
+					        fillOpacity={0.4}
+                >
+                    <tspan fontSize="15">Durée moyenne des sessions</tspan>
+                </text>
+			<CartesianGrid strokeDasharray="3 3" vertical={false} horizontal={false} />
+			<XAxis dataKey="day" axisLine={false} tickLine={false}/>
+			<Tooltip cursor={<CustomCursor/>} content={<CustomTooltip />}/>
+			<Line type="monotone" unit="min" dot={false} dataKey='sessionLength' stroke="#FFFFFF" />
         </LineChart>
         </div>
     )

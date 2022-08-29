@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
 const CustomTooltip = ({ active, payload }) => {
-    console.log('payload', payload)
     if (active && payload && payload.length) {
       return (
         <div className="custom-tooltip">
@@ -17,7 +16,7 @@ const CustomTooltip = ({ active, payload }) => {
   };
 export default function ActivityChart(props) {
     return (
-        <div>
+        <div className='activity'>
             <BarChart
                 data={props.sessions}
                 margin={{
@@ -28,7 +27,7 @@ export default function ActivityChart(props) {
                 }}
                 barSize={7}
                 barGap={8}
-                width={1200}
+                width={1000}
                 height={400}
             >                    
                 <text

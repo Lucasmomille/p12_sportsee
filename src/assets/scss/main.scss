@@ -1,8 +1,8 @@
 @import './variables/variables.scss';
-
+@import 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap';
 
 :root {
-    background-color: $color-white;
+    background-color: #FBFBFB;
     color: $color-black;
     font-size: 1em;
     
@@ -12,7 +12,7 @@
     flex-direction: column;
 }
 body {
-    font-family: 'Montserrat', Helvetica, sans-serif, monospace;
+    font-family: 'Roboto', 'Montserrat', Helvetica, sans-serif, monospace;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -40,7 +40,7 @@ a {
 
 
 .main {
-    max-width: 100%;
+    width: 100%;
     margin: 3rem 2rem 2rem 5rem;
 }
 
@@ -57,11 +57,35 @@ a {
 }
 
 .charts {
-    width: 100%;
+    width: 70%;
     &__container {
         display: flex;
         width: 100%;
         justify-content: space-between;
         overflow: hidden;
+        div {
+            border-radius: .5rem;
+        }
     }
+}
+
+.cards {
+    &__container {
+        height: 100%;
+        width: 100%;
+        padding: 3rem;
+
+    }
+}
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.custom-tooltip {
+    padding: .5rem;
+    border-radius: 0 !important;
+    background-color: $color-primary;
+    color: $color-white;
 }

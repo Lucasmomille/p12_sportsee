@@ -6,6 +6,7 @@ import ScoreChart from './components/RadialBarChart/ScoreChart'
 import ActivityChart from './components/BarChart/ActivityChart'
 import PerformanceChart from './components/RadarChart/PerformanceChart'
 import AverageSessionChart from './components/LineChart/AverageSessionChart'
+import EnergyCard from './components/EnergyCard/EnergyCard'
 import { getMockData } from './helpers/getDatas'
 import { UserInfos } from './models/UserInfos'
 import { UserActivity } from './models/UserActivity'
@@ -27,6 +28,7 @@ function App() {
 	const scoreChart = userInfo.getScore()
 	const percentage = userInfo.getScorePercentage()
 	const userFirstname = userInfo.getFirstName()
+	const userEnergy = userInfo.getEnergyInfos()
 	
 	const userActivityData = getMockData('Activity')
 	const userActivity = new UserActivity(userActivityData)
@@ -54,12 +56,19 @@ function App() {
 					<div className='charts'>
 						<ActivityChart sessions={userActivitySession}></ActivityChart>
 						<div className='charts__container'>
-						<AverageSessionChart data={userAverageSession}></AverageSessionChart>
-							<ScoreChart score={scoreChart} percentage={percentage}></ScoreChart>
+							<AverageSessionChart data={userAverageSession}></AverageSessionChart>
 							<PerformanceChart performance={userPerformance}></PerformanceChart>
+							<ScoreChart score={scoreChart} percentage={percentage}></ScoreChart>
 						</div>
 					</div>
-					<div></div>
+					<div className='cards__container'>
+					{userEnergy.map((energy, index) => (
+						<EnergyCard
+							key={index}
+							data={energy}
+						></EnergyCard>
+						))}
+					</div>
 				</div>
 				
 			</main>
