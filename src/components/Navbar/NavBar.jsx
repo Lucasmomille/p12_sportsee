@@ -1,6 +1,12 @@
 import React from 'react'
 import './navbar.scss';
 
+/**
+ * Generate navigation bar component.
+ * @component
+ * @param { * } props
+ * @return { HTMLElement }
+ */
 export default function NavBar() {
 
     return (

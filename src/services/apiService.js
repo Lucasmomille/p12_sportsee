@@ -28,6 +28,6 @@ export function useApi(url) {
     fetchData()
 
   }, [url])
-
+  
   return { data, isLoaded, isError }
 }

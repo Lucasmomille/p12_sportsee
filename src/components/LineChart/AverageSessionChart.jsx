@@ -6,6 +6,12 @@ import { getMockData } from '../../helpers/getDatas'
 import { UserAverageSession } from '../../models/UserAverageSession'
 import { useApi } from '../../services/apiService'
 
+  /**
+ * Function to generation a custom cursor for recharts.
+ * @function
+ * @param { * } props
+ * @return { HTMLElement }
+ */
 const CustomCursor = (props) => {
     const { points, width, height } = props;
     const { x, y } = points[0];
@@ -21,23 +27,39 @@ const CustomCursor = (props) => {
     );
   };
 
-  const CustomTooltip = ({ active, payload }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="custom-tooltip">
-          <p className="label">{`${payload[0].payload.sessionLength} min`}</p>
-        </div>
-      );
-    }
+  /**
+ * Function to generation a custom tooltip for recharts.
+ * @function
+ * @param { * } active
+ * @param { * } payload
+ * @return { HTMLElement }
+ */
+const CustomTooltip = ({ active, payload }) => {
+	if (active && payload && payload.length) {
+		return (
+		<div className="custom-tooltip">
+			<p className="label">{`${payload[0].payload.sessionLength} min`}</p>
+		</div>
+	)
+}
   
     return null;
   };
+
+/**
+ * Generate component with user's average session.
+ * @component
+ * @param { * } props
+ * @return { HTMLElement }
+ */
 export default function AverageSessionChart(props) {
 
   const { data, isLoaded, error } = useApi(
 		`http://localhost:3000/user/${props.id}/average-sessions`
 	)
-  
+  if (isLoaded) {
+		console.log("data average", data.data)
+	}
 	const userAverageSessionData = getMockData('AverageSession')
 	const userAverageSession = new UserAverageSession(userAverageSessionData).getAverageSessions()
     return (

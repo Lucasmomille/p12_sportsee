@@ -2,6 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './energycard.scss'
 
+/**
+ * Generate component with user's energetic looses.
+ * @component
+ * @param { * } props
+ * @return { HTMLElement }
+ */
 function EnergyCard(props) {
     const {name, src, count, unit} = props.data
   return (

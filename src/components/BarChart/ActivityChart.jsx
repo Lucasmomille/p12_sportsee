@@ -5,6 +5,13 @@ import { getMockData } from '../../helpers/getDatas'
 import { UserActivity } from '../../models/UserActivity'
 import { useApi } from '../../services/apiService'
 
+  /**
+ * Function to generation a custom tooltip for recharts.
+ * @function
+ * @param { * } active
+ * @param { * } payload
+ * @return { HTMLElement }
+ */
 const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
@@ -17,12 +24,21 @@ const CustomTooltip = ({ active, payload }) => {
   
     return null;
   };
+
+/**
+ * Generate component with user's activity.
+ * @component
+ * @param { * } props
+ * @return { HTMLElement }
+ */
 export default function ActivityChart(props) {
 
     const { data, isLoaded, error } = useApi(
 		`http://localhost:3000/user/${props.id}/activity`
 	)
-    
+    if (isLoaded) {
+		console.log("data activity", data.data)
+	}
     const userActivityData = getMockData('Activity')
 	const userActivity = new UserActivity(userActivityData)
 	const userActivitySession = userActivity.getSessions()

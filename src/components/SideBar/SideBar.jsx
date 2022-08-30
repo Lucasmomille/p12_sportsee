@@ -1,7 +1,13 @@
 import React from 'react'
 import './sidebar.scss';
 
-export default function NavBar() {
+/**
+ * Generate side bar component.
+ * @component
+ * @param { * } props
+ * @return { HTMLElement }
+ */
+export default function SideBar() {
 
     return (
         <div className="sidebar">

@@ -3,6 +3,12 @@ import PropTypes from 'prop-types'
 import { RadialBarChart, RadialBar } from 'recharts';
 import './scorechart.scss';
 
+/**
+ * Generate component with user's score.
+ * @component
+ * @param { * } props
+ * @return { HTMLElement }
+ */
 export default function ScoreChart(props) {
     return (
         <div className="score">
