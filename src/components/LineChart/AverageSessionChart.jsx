@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import { LineChart, Line, XAxis, CartesianGrid, Tooltip, Rectangle } from 'recharts';
 import './averageChart.scss'
-
+import { getMockData } from '../../helpers/getDatas'
+import { UserAverageSession } from '../../models/UserAverageSession'
+import { useApi } from '../../services/apiService'
 
 const CustomCursor = (props) => {
     const { points, width, height } = props;
@@ -31,12 +33,19 @@ const CustomCursor = (props) => {
     return null;
   };
 export default function AverageSessionChart(props) {
+
+  const { data, isLoaded, error } = useApi(
+		`http://localhost:3000/user/${props.id}/average-sessions`
+	)
+  
+	const userAverageSessionData = getMockData('AverageSession')
+	const userAverageSession = new UserAverageSession(userAverageSessionData).getAverageSessions()
     return (
         <div className='average'>
             <LineChart
                 width={300}
                 height={300}
-                data={props.data}
+                data={userAverageSession}
                 margin={{
                     top: 5,
                     right: 30,
@@ -48,8 +57,7 @@ export default function AverageSessionChart(props) {
                     className="score__title"
                     x="10%"
                     y={50}
-                    fill="#000000"
-					        fillOpacity={0.4}
+                    fill="#FFFFFF"
                 >
                     <tspan fontSize="15">Durée moyenne des sessions</tspan>
                 </text>
@@ -63,12 +71,5 @@ export default function AverageSessionChart(props) {
 }
 
 AverageSessionChart.propTypes = {
-    data: PropTypes.array.isRequired,
+	id: PropTypes.number.isRequired,
 }
-  
-AverageSessionChart.defaultProps =  [
-    {
-        day: 'L',
-        sessionLength: 30,
-    }
-]

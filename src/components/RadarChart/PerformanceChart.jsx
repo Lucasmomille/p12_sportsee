@@ -1,16 +1,24 @@
 import React, { useEffect } from "react";
 import PropTypes from 'prop-types'
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis } from 'recharts';
+import { getMockData } from '../../helpers/getDatas'
+import { UserPerformance } from '../../models/UserPerfomance'
+import { useApi } from '../../services/apiService'
 import './performancechart.scss'
 
 export default function PerformanceChart(props) {
+
+    const { data, isLoaded, error } = useApi(
+		`http://localhost:3000/user/${props.id}/performance`
+	)
     
     useEffect(() => {
 		const performanceSvg = document.getElementsByClassName("recharts-surface")[4]
         performanceSvg.setAttribute("viewBox", "-30 0 370 300")
 
 	}, [])
-    
+    const userPerformanceData = getMockData('Performance')
+	const userPerformance = new UserPerformance(userPerformanceData).getPerformance()
     return (
         <div className="performance">
             <RadarChart 
@@ -19,7 +27,7 @@ export default function PerformanceChart(props) {
                 width={300}
                 height={300} 
                 outerRadius="80%" 
-                data={props.performance}
+                data={userPerformance}
                 fill="#000000"
                 fillOpacity={0.6}
             >
@@ -37,13 +45,5 @@ export default function PerformanceChart(props) {
 }
 
 PerformanceChart.propTypes = {
-    performance: PropTypes.array.isRequired,
+    id: PropTypes.number.isRequired,
 }
-  
-PerformanceChart.defaultProps =  [
-    {
-        day: '01',
-        kilogram: '100',
-        calories: '200',
-    }
-]

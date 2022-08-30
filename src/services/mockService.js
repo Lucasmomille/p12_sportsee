@@ -1,1 +1,0 @@
-import { userMainData, userActivityData, userAverageSessionData, userPerformanceData } from '../data/mockData'

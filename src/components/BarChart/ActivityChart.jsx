@@ -1,6 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
+import { getMockData } from '../../helpers/getDatas'
+import { UserActivity } from '../../models/UserActivity'
+import { useApi } from '../../services/apiService'
 
 const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
@@ -15,10 +18,18 @@ const CustomTooltip = ({ active, payload }) => {
     return null;
   };
 export default function ActivityChart(props) {
+
+    const { data, isLoaded, error } = useApi(
+		`http://localhost:3000/user/${props.id}/activity`
+	)
+    
+    const userActivityData = getMockData('Activity')
+	const userActivity = new UserActivity(userActivityData)
+	const userActivitySession = userActivity.getSessions()
     return (
         <div className='activity'>
             <BarChart
-                data={props.sessions}
+                data={userActivitySession}
                 margin={{
                     top: 112,
                     right: 30,
@@ -33,7 +44,7 @@ export default function ActivityChart(props) {
                 <text
                     className=""
                     x={30}
-                    y={33}
+                    y={120}
                     fill="#000000"
                     textAnchor="left"
                     dominantBaseline="central"
@@ -67,13 +78,5 @@ export default function ActivityChart(props) {
 }
 
 ActivityChart.propTypes = {
-    sessions: PropTypes.array.isRequired,
+    id: PropTypes.number.isRequired,
 }
-  
-ActivityChart.defaultProps =  [
-    {
-        day: '01',
-        kilogram: '100',
-        calories: '200',
-    }
-]

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import './energycard.scss'
 
 function EnergyCard(props) {
-    console.log('energy', props.data)
     const {name, src, count, unit} = props.data
   return (
     <div className='card'>
@@ -17,7 +16,7 @@ function EnergyCard(props) {
 }
 
 EnergyCard.propTypes = {
-    data: PropTypes.array.isRequired
+    data: PropTypes.object.isRequired
 }
 
 export default EnergyCard

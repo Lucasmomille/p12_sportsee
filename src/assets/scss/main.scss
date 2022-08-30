@@ -71,10 +71,12 @@ a {
 
 .cards {
     &__container {
-        height: 100%;
         width: 100%;
-        padding: 3rem;
-
+        margin-top: 3rem;
+        padding: 3rem 3rem 0 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 }
 .container {

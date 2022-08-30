@@ -7,11 +7,13 @@
         
         
     }
-    &__count{
+    &__count {
         width: 100%;
+        font-weight: 700;
+        font-size: 1.5rem;
     }
-    &:not(:last-child) {
-        margin-bottom: 2rem;
+    &__name {
+        color: rgba($color-black, .5);
     }
     &:first-child{
         img {

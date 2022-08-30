@@ -1,5 +1,5 @@
 import './assets/scss/main.scss'
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from './components/Navbar/NavBar'
 import SideBar from './components/SideBar/SideBar'
 import ScoreChart from './components/RadialBarChart/ScoreChart'
@@ -9,42 +9,32 @@ import AverageSessionChart from './components/LineChart/AverageSessionChart'
 import EnergyCard from './components/EnergyCard/EnergyCard'
 import { getMockData } from './helpers/getDatas'
 import { UserInfos } from './models/UserInfos'
-import { UserActivity } from './models/UserActivity'
-import { UserPerformance } from './models/UserPerfomance'
-import { UserAverageSession } from './models/UserAverageSession'
+import { useApi } from './services/apiService'
 
 
 function App() {
-  	/* useEffect(() => {
-		axios.get('/data/logements.json')
-		.then(response => setData(response.data))
-		.catch(e => console.log(e))
-
-	}, []) */
+	const { data, isLoaded, error } = useApi(
+		`http://localhost:3000/user/18`
+	)
 	const userMainData = getMockData('MainData')
-	const userInfo = new UserInfos(userMainData)
-	console.log('userMainData', userMainData)
+	const [user, setUser ] = useState(userMainData)
+	if (isLoaded) {
+		console.log("data", data)
+		// setUser(data.data)
+	}
+	
+	const userInfo = new UserInfos(user)
 
 	const scoreChart = userInfo.getScore()
 	const percentage = userInfo.getScorePercentage()
+	
 	const userFirstname = userInfo.getFirstName()
 	const userEnergy = userInfo.getEnergyInfos()
-	
-	const userActivityData = getMockData('Activity')
-	const userActivity = new UserActivity(userActivityData)
-	const userActivitySession = userActivity.getSessions()
-
-	const userPerformanceData = getMockData('Performance')
-	const userPerformance = new UserPerformance(userPerformanceData).getPerformance()
-
-	const userAverageSessionData = getMockData('AverageSession')
-	const userAverageSession = new UserAverageSession(userAverageSessionData).getAverageSessions()
-	console.log('UserAverageSession', userAverageSession)
 
   return (
 	<>
 		<Navbar></Navbar>
-		<div className="dashboard">
+		{isLoaded ? <div className="dashboard">
 			
 			<SideBar></SideBar>
 			<main className='main'>
@@ -54,10 +44,10 @@ function App() {
 			</div>
 				<div className="container">
 					<div className='charts'>
-						<ActivityChart sessions={userActivitySession}></ActivityChart>
+						<ActivityChart id={userInfo.id}></ActivityChart>
 						<div className='charts__container'>
-							<AverageSessionChart data={userAverageSession}></AverageSessionChart>
-							<PerformanceChart performance={userPerformance}></PerformanceChart>
+							<AverageSessionChart id={userInfo.id}></AverageSessionChart>
+							<PerformanceChart id={userInfo.id}></PerformanceChart>
 							<ScoreChart score={scoreChart} percentage={percentage}></ScoreChart>
 						</div>
 					</div>
@@ -73,7 +63,10 @@ function App() {
 				
 			</main>
 
-		</div>
+		</div> 
+		: <div>
+			isLoading
+		</div>}
 	</>
   );
 }
