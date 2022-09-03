@@ -1,5 +1,5 @@
 import './assets/scss/main.scss'
-import React, { useState } from 'react'
+import React from 'react'
 import Navbar from './components/Navbar/NavBar'
 import SideBar from './components/SideBar/SideBar'
 import ScoreChart from './components/RadialBarChart/ScoreChart'
@@ -17,17 +17,33 @@ function App() {
 		`http://localhost:3000/user/18`
 	)
 	const userMainData = getMockData('MainData')
-	const [user, setUser ] = useState(userMainData)
-	if (isLoaded) {
-		console.log("data", data)
-		// setUser(data.data)
+	let result = [];
+	let promises = [useApi(`http://localhost:3000/user/18`), useApi(`http://localhost:3000/user/18/performance`)]
+
+	const promiseAll = Promise.all(promises)
+		.then(responses => responses.forEach(
+			(response) => {result.push(response)}
+		))
+		.then(console.log('res', result));
+	/* promiseAll.forEach(({ data }) => {
+		result = [...result, data];
+	}); */
+	console.log('result', promiseAll)
+	console.log('process.env.NODE_ENV', process.env.NODE_ENV)
+	let user;
+
+	// use mocked data only if in test mode
+	if (isLoaded && process.env.NODE_ENV !== 'test') {
+		user = data.data
+	} else {
+		user = userMainData
 	}
 	
 	const userInfo = new UserInfos(user)
 
 	const scoreChart = userInfo.getScore()
 	const percentage = userInfo.getScorePercentage()
-	
+
 	const userFirstname = userInfo.getFirstName()
 	const userEnergy = userInfo.getEnergyInfos()
 

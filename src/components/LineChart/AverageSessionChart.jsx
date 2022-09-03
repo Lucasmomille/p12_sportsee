@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import { LineChart, Line, XAxis, CartesianGrid, Tooltip, Rectangle } from 'recharts';
+import { LineChart, Line, XAxis, CartesianGrid, Tooltip, Rectangle, ResponsiveContainer } from 'recharts';
 import './averageChart.scss'
 import { getMockData } from '../../helpers/getDatas'
 import { UserAverageSession } from '../../models/UserAverageSession'
@@ -54,41 +54,48 @@ const CustomTooltip = ({ active, payload }) => {
  */
 export default function AverageSessionChart(props) {
 
-  const { data, isLoaded, error } = useApi(
+	const { data, isLoaded } = useApi(
 		`http://localhost:3000/user/${props.id}/average-sessions`
 	)
-  if (isLoaded) {
-		console.log("data average", data.data)
-	}
+	let user
 	const userAverageSessionData = getMockData('AverageSession')
-	const userAverageSession = new UserAverageSession(userAverageSessionData).getAverageSessions()
+
+	if (isLoaded && process.env.NODE_ENV === ('development' || 'production')) {
+		user = data.data
+	} else {
+		user = userAverageSessionData
+	}
+
+	const userAverageSession = new UserAverageSession(user).getAverageSessions()
     return (
-        <div className='average'>
-            <LineChart
-                width={300}
-                height={300}
-                data={userAverageSession}
-                margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-            	}}
-       		 >
-				<text
-                    className="score__title"
-                    x="10%"
-                    y={50}
-                    fill="#FFFFFF"
-                >
-                    <tspan fontSize="15">Durée moyenne des sessions</tspan>
-                </text>
-			<CartesianGrid strokeDasharray="3 3" vertical={false} horizontal={false} />
-			<XAxis dataKey="day" axisLine={false} tickLine={false}/>
-			<Tooltip cursor={<CustomCursor/>} content={<CustomTooltip />}/>
-			<Line type="monotone" unit="min" dot={false} dataKey='sessionLength' stroke="#FFFFFF" />
-        </LineChart>
-        </div>
+		<>
+        {isLoaded? <div className='average'>
+            <ResponsiveContainer width="100%" height={300}>
+				<LineChart
+					data={userAverageSession}
+					margin={{
+						top: 5,
+						right: 30,
+						left: 20,
+						bottom: 5,
+					}}
+				>
+					<text
+						className="score__title"
+						x="10%"
+						y={50}
+						fill="#FFFFFF"
+					>
+						<tspan fontSize="15">Durée moyenne des sessions</tspan>
+					</text>
+					<CartesianGrid strokeDasharray="3 3" vertical={false} horizontal={false} />
+					<XAxis dataKey="day" axisLine={false} tickLine={false}/>
+					<Tooltip cursor={<CustomCursor/>} content={<CustomTooltip />}/>
+					<Line type="monotone" unit="min" dot={false} dataKey='sessionLength' stroke="#FFFFFF" />
+				</LineChart>
+			</ResponsiveContainer>
+        </div> : <div></div>}
+		</>
     )
 }
 

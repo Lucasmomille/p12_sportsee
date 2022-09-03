@@ -11,7 +11,6 @@ import axios from 'axios'
 export function useApi(url) {
   const [data, setData] = useState({})
   const [isLoaded, setLoad] = useState(false)
-  const [isError, setError] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,12 +21,13 @@ export function useApi(url) {
       })
       .catch(e => {
           console.log(e)
-          setError(true)
       })
     }
-    fetchData()
+    if(!isLoaded) {
+      fetchData()
+    }
 
-  }, [url])
+  }, [url, isLoaded])
   
-  return { data, isLoaded, isError }
+  return { data, isLoaded }
 }

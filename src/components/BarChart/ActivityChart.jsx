@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import { getMockData } from '../../helpers/getDatas'
 import { UserActivity } from '../../models/UserActivity'
 import { useApi } from '../../services/apiService'
@@ -33,17 +33,22 @@ const CustomTooltip = ({ active, payload }) => {
  */
 export default function ActivityChart(props) {
 
-    const { data, isLoaded, error } = useApi(
+    const { data, isLoaded } = useApi(
 		`http://localhost:3000/user/${props.id}/activity`
 	)
-    if (isLoaded) {
-		console.log("data activity", data.data)
-	}
+    
     const userActivityData = getMockData('Activity')
-	const userActivity = new UserActivity(userActivityData)
+    let user;
+    if (isLoaded && process.env.NODE_ENV === ('development' || 'production')) {
+		user = data.data
+	} else {
+		user = userActivityData
+	}
+	const userActivity = new UserActivity(user)
 	const userActivitySession = userActivity.getSessions()
     return (
         <div className='activity'>
+            <ResponsiveContainer width="100%" height={380}>
             <BarChart
                 data={userActivitySession}
                 margin={{
@@ -54,8 +59,6 @@ export default function ActivityChart(props) {
                 }}
                 barSize={7}
                 barGap={8}
-                width={1000}
-                height={400}
             >                    
                 <text
                     className=""
@@ -89,6 +92,7 @@ export default function ActivityChart(props) {
                     name="Calories brûlées (kCal)"
                 />
             </BarChart>
+            </ResponsiveContainer>
         </div>
     )
 }
