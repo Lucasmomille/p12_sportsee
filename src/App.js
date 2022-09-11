@@ -9,37 +9,39 @@ import AverageSessionChart from './components/LineChart/AverageSessionChart'
 import EnergyCard from './components/EnergyCard/EnergyCard'
 import { getMockData } from './helpers/getDatas'
 import { UserInfos } from './models/UserInfos'
-import { useApi } from './services/apiService'
-
+import { useApiPromise } from './services/api'
+import { UserActivity } from './models/UserActivity'
+import { UserPerformance } from './models/UserPerfomance'
+import { UserAverageSession } from './models/UserAverageSession'
 
 function App() {
-	const { data, isLoaded, error } = useApi(
-		`http://localhost:3000/user/18`
-	)
-	const userMainData = getMockData('MainData')
-	let result = [];
-	let promises = [useApi(`http://localhost:3000/user/18`), useApi(`http://localhost:3000/user/18/performance`)]
 
-	const promiseAll = Promise.all(promises)
-		.then(responses => responses.forEach(
-			(response) => {result.push(response)}
-		))
-		.then(console.log('res', result));
-	/* promiseAll.forEach(({ data }) => {
-		result = [...result, data];
-	}); */
-	console.log('result', promiseAll)
-	console.log('process.env.NODE_ENV', process.env.NODE_ENV)
-	let user;
+	const { isLoadedApi, user, userPerformance, userActivity, userSessions } = useApiPromise(18)
+	const userMainData = getMockData('MainData')
+
+	let userInit, performance, activity, sessions;
 
 	// use mocked data only if in test mode
-	if (isLoaded && process.env.NODE_ENV !== 'test') {
-		user = data.data
+	if (isLoadedApi && process.env.NODE_ENV !== 'test') {
+		userInit = user
+		performance = new UserPerformance(userPerformance).getPerformance()
+		activity = new UserActivity(userActivity).getSessions()
+		sessions = new UserAverageSession(userSessions).getAverageSessions()
+
 	} else {
-		user = userMainData
+		userInit = userMainData
+
+		const userPerformanceMocked = getMockData('Performance')
+		performance = new UserPerformance(userPerformanceMocked).getPerformance()
+
+		const userActivityMocked = getMockData('Activity')
+		activity = new UserActivity(userActivityMocked).getSessions()
+
+		const userSessionMocked = getMockData('AverageSession')
+		sessions = new UserAverageSession(userSessionMocked).getAverageSessions()
 	}
 	
-	const userInfo = new UserInfos(user)
+	const userInfo = new UserInfos(userInit)
 
 	const scoreChart = userInfo.getScore()
 	const percentage = userInfo.getScorePercentage()
@@ -50,7 +52,7 @@ function App() {
   return (
 	<>
 		<Navbar></Navbar>
-		{isLoaded ? <div className="dashboard">
+		{isLoadedApi ? <div className="dashboard">
 			
 			<SideBar></SideBar>
 			<main className='main'>
@@ -60,10 +62,10 @@ function App() {
 			</div>
 				<div className="container">
 					<div className='charts'>
-						<ActivityChart id={userInfo.id}></ActivityChart>
+						<ActivityChart activity={activity}></ActivityChart>
 						<div className='charts__container'>
-							<AverageSessionChart id={userInfo.id}></AverageSessionChart>
-							<PerformanceChart id={userInfo.id}></PerformanceChart>
+							<AverageSessionChart sessions={sessions}></AverageSessionChart>
+							<PerformanceChart performance={performance}></PerformanceChart>
 							<ScoreChart score={scoreChart} percentage={percentage}></ScoreChart>
 						</div>
 					</div>
@@ -81,7 +83,7 @@ function App() {
 
 		</div> 
 		: <div>
-			isLoading
+			En cours de chargement&hellip;
 		</div>}
 	</>
   );

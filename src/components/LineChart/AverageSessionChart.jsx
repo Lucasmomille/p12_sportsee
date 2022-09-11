@@ -2,9 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import { LineChart, Line, XAxis, CartesianGrid, Tooltip, Rectangle, ResponsiveContainer } from 'recharts';
 import './averageChart.scss'
-import { getMockData } from '../../helpers/getDatas'
-import { UserAverageSession } from '../../models/UserAverageSession'
-import { useApi } from '../../services/apiService'
 
   /**
  * Function to generation a custom cursor for recharts.
@@ -53,26 +50,11 @@ const CustomTooltip = ({ active, payload }) => {
  * @return { HTMLElement }
  */
 export default function AverageSessionChart(props) {
-
-	const { data, isLoaded } = useApi(
-		`http://localhost:3000/user/${props.id}/average-sessions`
-	)
-	let user
-	const userAverageSessionData = getMockData('AverageSession')
-
-	if (isLoaded && process.env.NODE_ENV === ('development' || 'production')) {
-		user = data.data
-	} else {
-		user = userAverageSessionData
-	}
-
-	const userAverageSession = new UserAverageSession(user).getAverageSessions()
     return (
-		<>
-        {isLoaded? <div className='average'>
+		<div className='average'>
             <ResponsiveContainer width="100%" height={300}>
 				<LineChart
-					data={userAverageSession}
+					data={props.sessions}
 					margin={{
 						top: 5,
 						right: 30,
@@ -94,11 +76,17 @@ export default function AverageSessionChart(props) {
 					<Line type="monotone" unit="min" dot={false} dataKey='sessionLength' stroke="#FFFFFF" />
 				</LineChart>
 			</ResponsiveContainer>
-        </div> : <div></div>}
-		</>
+        </div>
     )
 }
 
 AverageSessionChart.propTypes = {
-	id: PropTypes.number.isRequired,
+	sessions: PropTypes.array.isRequired,
 }
+
+AverageSessionChart.defaultProps =  [
+    {
+        day: 'L',
+        sessionLength: 30,
+    }
+]

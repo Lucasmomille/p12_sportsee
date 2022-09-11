@@ -1,9 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
-import { getMockData } from '../../helpers/getDatas'
-import { UserActivity } from '../../models/UserActivity'
-import { useApi } from '../../services/apiService'
 
   /**
  * Function to generation a custom tooltip for recharts.
@@ -32,25 +29,11 @@ const CustomTooltip = ({ active, payload }) => {
  * @return { HTMLElement }
  */
 export default function ActivityChart(props) {
-
-    const { data, isLoaded } = useApi(
-		`http://localhost:3000/user/${props.id}/activity`
-	)
-    
-    const userActivityData = getMockData('Activity')
-    let user;
-    if (isLoaded && process.env.NODE_ENV === ('development' || 'production')) {
-		user = data.data
-	} else {
-		user = userActivityData
-	}
-	const userActivity = new UserActivity(user)
-	const userActivitySession = userActivity.getSessions()
     return (
         <div className='activity'>
             <ResponsiveContainer width="100%" height={380}>
             <BarChart
-                data={userActivitySession}
+                data={props.activity}
                 margin={{
                     top: 112,
                     right: 30,
@@ -98,5 +81,13 @@ export default function ActivityChart(props) {
 }
 
 ActivityChart.propTypes = {
-    id: PropTypes.number.isRequired,
+    activity: PropTypes.array.isRequired,
 }
+
+ActivityChart.defaultProps =  [
+    {
+        day: '01',
+        kilogram: '100',
+        calories: '200',
+    }
+]
