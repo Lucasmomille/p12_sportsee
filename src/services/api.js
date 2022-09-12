@@ -18,20 +18,19 @@ export function useApiPromise(id) {
   const [userActivity, setUserActivity] = useState({})
   const [userSessions, setUserSessions] = useState({})
 
-    const promises = [
-        axios.get(`http://localhost:3000/user/${id}`),
-        axios.get(`http://localhost:3000/user/${id}/performance`),
-        axios.get(`http://localhost:3000/user/${id}/activity`),
-        axios.get(`http://localhost:3000/user/${id}/average-sessions`)
-    ]
-    // peut etre faire class
   useEffect(() => {
+    const promises = [
+      axios.get(`http://localhost:3000/user/${id}`),
+      axios.get(`http://localhost:3000/user/${id}/performance`),
+      axios.get(`http://localhost:3000/user/${id}/activity`),
+      axios.get(`http://localhost:3000/user/${id}/average-sessions`)
+  ]
     if(dataApi === null) {
         Promise.all(promises)
         .then(fetchedData => {
-            console.log(fetchedData)
             setData(fetchedData)
         })
+        .catch(err => console.log('error', err))
     } else {
       setUser(dataApi[0].data.data)
       setUserPerformance(dataApi[1].data.data)
@@ -40,7 +39,7 @@ export function useApiPromise(id) {
       setLoad(true)
     }
 
-  }, [isLoadedApi, promises, dataApi])
+  }, [isLoadedApi, id, dataApi])
   
   return { isLoadedApi, user, userPerformance, userActivity, userSessions }
 }

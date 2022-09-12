@@ -16,3 +16,10 @@ Launch it locally, it will be running on port 3000
 
 # II. Run the application
 
+Clone this repository
+
+npm install
+
+Make sure the backend is running before launching this one
+
+npm start - it will be running on port 3006
