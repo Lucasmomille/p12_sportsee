@@ -2,7 +2,7 @@
 export const userMainData = {
     id: 12,
     userInfos: {
-        firstName: 'Karl',
+        firstName: 'Tom',
         lastName: 'Dovineau',
         age: 31,
     },

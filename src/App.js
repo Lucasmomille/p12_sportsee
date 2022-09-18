@@ -16,7 +16,7 @@ import { UserAverageSession } from './models/UserAverageSession'
 
 function App() {
 
-	const { isLoadedApi, user, userPerformance, userActivity, userSessions } = useApiPromise(18)
+	const { isLoadedApi, user, userPerformance, userActivity, userSessions, isError } = useApiPromise(18)
 	const userMainData = getMockData('MainData')
 
 	let userInit, performance, activity, sessions;
@@ -49,6 +49,11 @@ function App() {
 	const userFirstname = userInfo.getFirstName()
 	const userEnergy = userInfo.getEnergyInfos()
 
+	if(isError) {
+		return (
+			<div>Error 500</div>
+		)
+	}
   return (
 	<>
 		<Navbar></Navbar>
@@ -85,6 +90,7 @@ function App() {
 		: <div>
 			En cours de chargement&hellip;
 		</div>}
+		{isError ?? <div>Error 500</div>}
 	</>
   );
 }

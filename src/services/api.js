@@ -17,6 +17,7 @@ export function useApiPromise(id) {
   const [userPerformance, setUserPerformance] = useState({})
   const [userActivity, setUserActivity] = useState({})
   const [userSessions, setUserSessions] = useState({})
+  const [isError, setError] = useState(false)
 
   useEffect(() => {
     const promises = [
@@ -30,16 +31,20 @@ export function useApiPromise(id) {
         .then(fetchedData => {
             setData(fetchedData)
         })
-        .catch(err => console.log('error', err))
+        .catch(err => {
+          console.log('error', err)
+          setError(true)
+        })
     } else {
       setUser(dataApi[0].data.data)
       setUserPerformance(dataApi[1].data.data)
       setUserActivity(dataApi[2].data.data)
       setUserSessions(dataApi[3].data.data)
       setLoad(true)
+      setError(false)
     }
 
   }, [isLoadedApi, id, dataApi])
   
-  return { isLoadedApi, user, userPerformance, userActivity, userSessions }
+  return { isLoadedApi, user, userPerformance, userActivity, userSessions, isError }
 }

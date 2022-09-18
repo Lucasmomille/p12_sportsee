@@ -19,7 +19,9 @@ Launch it locally, it will be running on port 3000
 Clone this repository
 
 npm install
+or
+If you encounter any problem with better-docs: npm install -f
 
-Make sure the backend is running before launching this one
+Make sure the backend is running before launching this last command
 
 npm start - it will be running on port 3006
