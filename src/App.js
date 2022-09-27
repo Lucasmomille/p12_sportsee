@@ -2,10 +2,10 @@ import './assets/scss/main.scss'
 import React from 'react'
 import Navbar from './components/Navbar/NavBar'
 import SideBar from './components/SideBar/SideBar'
-import ScoreChart from './components/RadialBarChart/ScoreChart'
-import ActivityChart from './components/BarChart/ActivityChart'
-import PerformanceChart from './components/RadarChart/PerformanceChart'
-import AverageSessionChart from './components/LineChart/AverageSessionChart'
+import ScoreChart from './components/ScroreChart/ScoreChart'
+import ActivityChart from './components/ActivityChart/ActivityChart'
+import PerformanceChart from './components/PerformanceChart/PerformanceChart'
+import AverageSessionChart from './components/AverageChart/AverageSessionChart'
 import EnergyCard from './components/EnergyCard/EnergyCard'
 import { getMockData } from './helpers/getDatas'
 import { UserInfos } from './models/UserInfos'
@@ -90,7 +90,6 @@ function App() {
 		: <div>
 			En cours de chargement&hellip;
 		</div>}
-		{isError ?? <div>Error 500</div>}
 	</>
   );
 }

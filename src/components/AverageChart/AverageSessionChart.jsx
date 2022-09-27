@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import { LineChart, Line, XAxis, CartesianGrid, Tooltip, Rectangle, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Rectangle, ResponsiveContainer } from 'recharts';
 import './averageChart.scss'
 
   /**
@@ -23,7 +23,7 @@ const CustomCursor = (props) => {
       />
     );
   };
-
+// add domain with yAxis, hide={true}
   /**
  * Function to generation a custom tooltip for recharts.
  * @function
@@ -37,8 +37,8 @@ const CustomTooltip = ({ active, payload }) => {
 		<div className="custom-tooltip">
 			<p className="label">{`${payload[0].payload.sessionLength} min`}</p>
 		</div>
-	)
-}
+		)
+	}
   
     return null;
   };
@@ -50,16 +50,18 @@ const CustomTooltip = ({ active, payload }) => {
  * @return { HTMLElement }
  */
 export default function AverageSessionChart(props) {
+	const arraySessionLength = props.sessions.map(session => session.sessionLength)
+	const yAxisValue = Math.max(...arraySessionLength) * 1.5;
     return (
 		<div className='average'>
             <ResponsiveContainer width="100%" height={300}>
 				<LineChart
 					data={props.sessions}
 					margin={{
-						top: 5,
-						right: 30,
+						top: 0,
+						right: 20,
 						left: 20,
-						bottom: 5,
+						bottom: 0,
 					}}
 				>
 					<text
@@ -72,6 +74,7 @@ export default function AverageSessionChart(props) {
 					</text>
 					<CartesianGrid strokeDasharray="3 3" vertical={false} horizontal={false} />
 					<XAxis dataKey="day" axisLine={false} tickLine={false}/>
+					<YAxis hide={true} type="number" domain={[0, yAxisValue]}></YAxis>
 					<Tooltip cursor={<CustomCursor/>} content={<CustomTooltip />}/>
 					<Line type="monotone" unit="min" dot={false} dataKey='sessionLength' stroke="#FFFFFF" />
 				</LineChart>
