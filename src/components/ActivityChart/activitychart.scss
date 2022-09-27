@@ -1,5 +1,8 @@
 @import '../../assets/scss/variables/variables.scss';
 .activity {
+    .recharts-tooltip-wrapper {
+        border: none !important;
+    }
     .custom-tooltip {
         fill: $color-white;
     }
