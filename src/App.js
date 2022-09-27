@@ -57,7 +57,7 @@ function App() {
   return (
 	<>
 		<Navbar></Navbar>
-		{isLoadedApi ? <div className="dashboard">
+		{isLoadedApi || process.env.NODE_ENV === 'test' ? <div className="dashboard">
 			
 			<SideBar></SideBar>
 			<main className='main'>

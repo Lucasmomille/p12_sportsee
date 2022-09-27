@@ -55,7 +55,7 @@ export class UserInfos {
   }
 
   /**
-   * Get the user score in percentage.
+   * Get the user score in percentage
    * @return { Number } User's daily score
    */
   getScorePercentage() {
@@ -63,7 +63,7 @@ export class UserInfos {
   }
 
   /**
-   * Get infos for energy cards.
+   * Get infos for energy cards
    * @return { Array.<{ name: String, src: String, count: Number, unit: String }> } energy infos
    */
   getEnergyInfos() {

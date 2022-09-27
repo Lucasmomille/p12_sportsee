@@ -5,7 +5,7 @@
  */
 export class UserActivity {
   /**
-   * Create a user activity data.
+   * Create a user activity data
    * @param { Number } data.id user id
    * @param { Array.<Object> } data.sessions user daily activity
    */
@@ -15,22 +15,22 @@ export class UserActivity {
   }
 
   /**
-   * Get the user session formatted for the chart.
+   * Get the user session formatted for the chart
    * @return { Array.<{ day: String, kilogram: Number, calories: Number }> }
    */
    getSessions() {
     const sessions = [...this.userSessions]
 
-	const sortSessions = sessions.sort(function (a, b) {
-		return new Date(b.day) - new Date(a.day)
-	})
+    const sortSessions = sessions.sort(function (a, b) {
+      return new Date(b.day) - new Date(a.day)
+    })
 
 	const lastSessions = sortSessions.slice(0, 10)
 
 	// Reorder sessions in ascending order for xAxis
-	const reOrderlastSessions = lastSessions.sort(function(a, b) {
-		return new Date(a.day) - new Date(b.day)
-	})
+    const reOrderlastSessions = lastSessions.sort(function(a, b) {
+      return new Date(a.day) - new Date(b.day)
+	  })
     return reOrderlastSessions.map((session) => {
       return {
         ...session,

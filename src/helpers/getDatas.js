@@ -1,7 +1,7 @@
 import { userMainData, userActivityData, userAverageSessionData, userPerformanceData } from '../data/mockData'
 
-export function getMockData(dataType) {
-    switch (dataType) {
+export function getMockData(data) {
+    switch (data) {
         case 'MainData':
           return userMainData
         case 'Activity':
@@ -11,9 +11,9 @@ export function getMockData(dataType) {
         case 'Performance':
           return userPerformanceData
         case '':
-          console.error("Empty 'dataType' argument")
+          console.error("Empty argument")
           break
         default:
-          console.error("Wrong 'dataType' argument")
+          console.error("Wrong argument")
     }
 }

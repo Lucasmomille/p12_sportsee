@@ -5,7 +5,7 @@
  */
  export class UserAverageSession {
     /**
-     * Create a user activity data.
+     * Create a user activity data
      * @param { Number } data.id user id
      * @param { Array.<Object> } data.sessions user performance's kind
      */

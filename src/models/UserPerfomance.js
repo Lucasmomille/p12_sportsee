@@ -5,7 +5,7 @@
  */
  export class UserPerformance {
     /**
-     * Create a user activity data.
+     * Create a user activity data
      * @param { Number } data.id user id
      * @param { Array.<Object> } data.kind user performance's kind
      * @param { Array.<Object> } data.data user's data performance
